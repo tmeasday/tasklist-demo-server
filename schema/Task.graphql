@@ -1,0 +1,40 @@
+type Task {
+  id: ObjID!
+  title: String!
+  state: TaskState!
+  subtitle: String
+  url: String
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  tasks(lastCreatedAt: Float, limit: Int): [Task!]
+  task(id: ObjID!): Task
+}
+
+input CreateTaskInput {
+  title: String!
+  state: TaskState!
+  subtitle: String
+  url: String
+}
+
+input UpdateTaskInput {
+  title: String!
+  state: TaskState!
+  subtitle: String
+  url: String
+}
+
+extend type Mutation {
+  createTask(input: CreateTaskInput!): Task
+  updateTask(id: ObjID!, input: UpdateTaskInput!): Task
+  removeTask(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  taskCreated: Task
+  taskUpdated: Task
+  taskRemoved: ObjID
+}

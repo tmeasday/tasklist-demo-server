@@ -1,0 +1,40 @@
+type User {
+  id: ObjID!
+  email: String!
+  hasGitHubToken: Boolean!
+  hasTrelloToken: Boolean!
+  tasks(state: TaskState, lastCreatedAt: Float, limit: Int): [Task!]!
+  createdAt: Float!
+  updatedAt: Float!
+}
+
+extend type Query {
+  users(lastCreatedAt: Float, limit: Int): [User!]
+  user(id: ObjID!): User
+  me: User
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  hasGitHubToken: Boolean!
+  hasTrelloToken: Boolean!
+}
+
+input UpdateUserInput {
+  email: String!
+  hasGitHubToken: Boolean!
+  hasTrelloToken: Boolean!
+}
+
+extend type Mutation {
+  createUser(input: CreateUserInput!): User
+  updateUser(id: ObjID!, input: UpdateUserInput!): User
+  removeUser(id: ObjID!): Boolean
+}
+
+extend type Subscription {
+  userCreated: User
+  userUpdated: User
+  userRemoved: ObjID
+}
