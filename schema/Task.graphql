@@ -1,7 +1,8 @@
 type Task {
   id: ObjID!
   title: String!
-  state: TaskState!
+  owner: User!
+  state: TaskState
   subtitle: String
   url: String
   createdAt: Float!
@@ -15,14 +16,16 @@ extend type Query {
 
 input CreateTaskInput {
   title: String!
-  state: TaskState!
+  ownerId: ObjID!
+  state: TaskState
   subtitle: String
   url: String
 }
 
 input UpdateTaskInput {
   title: String!
-  state: TaskState!
+  ownerId: ObjID!
+  state: TaskState
   subtitle: String
   url: String
 }

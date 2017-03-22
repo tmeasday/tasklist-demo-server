@@ -19,6 +19,10 @@ export default class Task {
     }).sort({ createdAt: 1 }).limit(limit).toArray();
   }
 
+  owner(task) {
+    return this.context.User.findOneById(task.ownerId);
+  }
+
   async insert(doc) {
     const docToInsert = Object.assign({}, doc, {
       createdAt: Date.now(),

@@ -3,6 +3,10 @@ const resolvers = {
     id(task) {
       return task._id;
     },
+
+    owner(task, args, { Task }) {
+      return Task.owner(task);
+    },
   },
   Query: {
     tasks(root, { lastCreatedAt, limit }, { Task }) {
